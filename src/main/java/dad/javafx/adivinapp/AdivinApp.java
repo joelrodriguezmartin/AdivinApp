@@ -19,7 +19,6 @@ public class AdivinApp extends Application {
 	private Alert comprobarAlert;
 	private int numeroAdivinar;
 	private int cuentaIntentos = 1;
-	boolean mayorQueCincuenta = numeroAdivinar > 50;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -51,14 +50,15 @@ public class AdivinApp extends Application {
 	private void onComprobarButtonAction(ActionEvent e) {
 		
 		try {
-			if(Integer.parseInt(numeroText.getText()) != numeroAdivinar){
+			int intento = Integer.parseInt(numeroText.getText());
+			if(intento != numeroAdivinar){
 				comprobarAlert = new Alert(AlertType.WARNING);
 				comprobarAlert.setHeaderText("¡Has fallado!");
-				if(mayorQueCincuenta) {
-					comprobarAlert.setContentText("El número a adivinar es mayor que 50, vuelve a intentarlo");
+				if(intento < numeroAdivinar) {
+					comprobarAlert.setContentText("El número a adivinar es mayor que "+intento+" , vuelve a intentarlo");
 				}
 				else {
-					comprobarAlert.setContentText("El número a adivinar es menor que 50, vuelve a intentarlo");
+					comprobarAlert.setContentText("El número a adivinar es menor que "+intento+" , vuelve a intentarlo");
 				}
 				cuentaIntentos++;
 				comprobarAlert.showAndWait();
@@ -68,7 +68,6 @@ public class AdivinApp extends Application {
 				comprobarAlert.setHeaderText("Has ganado");
 				comprobarAlert.setContentText("Has necesitado "+cuentaIntentos+" intentos, intentalo de nuevo y hazlo mejor");
 				numeroAdivinar = (int) (Math.random() * 100 + 1);
-				cuentaIntentos = 1;
 				comprobarAlert.showAndWait();
 				
 			}
