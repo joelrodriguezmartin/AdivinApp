@@ -68,6 +68,7 @@ public class AdivinApp extends Application {
 				comprobarAlert.setHeaderText("Has ganado");
 				comprobarAlert.setContentText("Has necesitado "+cuentaIntentos+" intentos, intentalo de nuevo y hazlo mejor");
 				numeroAdivinar = (int) (Math.random() * 100 + 1);
+				cuentaIntentos = 1;
 				comprobarAlert.showAndWait();
 				
 			}
